@@ -102,7 +102,7 @@ vim.g.have_nerd_font = false
 vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.o.relativenumber = true
+vim.o.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
@@ -171,18 +171,17 @@ vim.o.confirm = true
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<C-c>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
 --
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set('t', '<C-c><C-c>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -363,8 +362,7 @@ require('lazy').setup({
     event = 'VimEnter',
     dependencies = {
       'nvim-lua/plenary.nvim',
---      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'mingw32-make -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && mingw32-make --build build --config Release --target install' },
-      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'mingw32-make' },
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
@@ -428,7 +426,7 @@ require('lazy').setup({
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
-        -- You can pass additional configuration to Telescope to change the theme, layout, etc.
+        -- You can pass additional configration to Telescope to change the theme, layout, etc.
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
           winblend = 10,
           previewer = false,
@@ -660,7 +658,7 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- clangd = {},
+        clangd = {},
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
@@ -901,7 +899,7 @@ require('lazy').setup({
       --  - ci'  - [C]hange [I]nside [']quote
       require('mini.ai').setup { n_lines = 500 }
 
-      -- Add/delete/replace surroundings (brackets, quotes, etc.)
+      -- Add/delete/replace surroundings (bracets, quotes, etc.)
       --
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
@@ -909,7 +907,7 @@ require('lazy').setup({
       require('mini.surround').setup()
 
       -- Simple and easy statusline.
-      --  You could remove this setup call if you don't like it,
+      --  You could remove this setup call if you don't lie it,
       --  and try some other statusline plugin
       local statusline = require 'mini.statusline'
       -- set use_icons to true if you have a Nerd Font
